@@ -7,53 +7,9 @@
     <script src="./vue.js"></script>
 </head>
 <body>
-    <div id="app">
-        <input type="text" v-model="msg">
-        <button @click="handleBtnClick">提交</button>
-        <ul>
-            <!-- <li v-for="item in list">{{ item }}</li> -->
-            <todo-item  v-bind:content="item" 
-                        v-for="(item, index) in list"
-                        @delete="handleItemDelete(index)">
-            </todo-item>
-        </ul>
-    </div>
+    <div id="app"></div>
     <script>
-        // Vue.component("TodoItem", {
-        //     props: ['content'],
-        //     template: "<li>{{ content }}</li>"
-        // })
-        var TodoItem = {
-            props: ['content'],
-            template: "<li @click='handleItemClick'>{{ content }}</li>",
-            methods: {
-                handleItemClick: function() {
-                    this.$emit("delete")
-                }
-            }
-        }
-        var app = new Vue({
-            el: '#app',
-            components: {
-                TodoItem: TodoItem
-            },
-            data: {
-                list: [],
-                msg: ''
-            },
-            methods: {
-                handleBtnClick: function() {
-                    if(!this.msg) {
-                        return
-                    }
-                    this.list.push(this.msg)
-                    this.msg = ''
-                },
-                handleItemDelete: function(index) {
-                    this.list.splice(index, 1)
-                }
-            }
-        })
+        
     </script>
 </body>
 </html>

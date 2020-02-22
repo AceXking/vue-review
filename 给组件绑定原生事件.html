@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child @change="handleChange"></child>
+        <span>native触发原生事件</span>
+        <child1 @click.native="handleChange"></child1>
+    </div>
+    <script>
+        Vue.component('child', {
+            template: '<div @click="handleChildClick">Child</div>',
+            methods: {
+                handleChildClick() {
+                    alert('child click')
+                    this.$emit('change')
+                }
+            }
+        })
+        Vue.component('child1', {
+            template: '<div>Child1</div>'
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+                handleChange: function() {
+                    console.log('change')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

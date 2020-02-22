@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>Bus/总线/发布订阅模式/观察者模式</h2>
+        <child content="wang"></child>
+        <child content="xin"></child>
+    </div>
+    <script>
+        Vue.prototype.bus = new Vue()
+        Vue.component('child', {
+            props: {
+                content: String
+            },
+            template: '<div @click="handleClick">{{text}}</div>',
+            data: function() {
+                return {
+                    text: this.content
+                }
+            },
+            methods: {
+                handleClick() {
+                    console.log(this.text)
+                    this.bus.$emit('change', this.text)
+                }
+            },
+            mounted() {
+                this.bus.$on('change', (msg)=> {
+                    this.text = msg
+                })
+            }
+        })
+        var vm = new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>
