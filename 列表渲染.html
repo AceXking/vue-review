@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-for="(item, index) of list" 
+             :key="item.id">
+             <div>
+                {{item.text}} ---- {{index}}
+             </div>
+             <span>
+                {{item.text}}
+             </span>
+        </div>
+        <div>-----------------分割--------------</div>
+        <div v-for="(item, key, index) of obj">
+            {{ item }} --- 键值： {{key}} ---- {{index}}
+        </div>
+        <div>-----------------分割--------------</div>
+        <div v-for="(item, index) of listArr">
+            {{item}}
+        </div>
+    </div>
+    <script>
+        // pop 删除最后一条 push 增加一条 shift删除第一项  unshift从第一项增加 splice 截取 sort 排序 reverse 取反
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list:[
+                    {
+                        id: '20022101',
+                        text: 'hello'
+                    },
+                    {
+                        id: '20022102',
+                        text: 'Xin'
+                    },
+                    {
+                        id: '20022103',
+                        text: 'love'
+                    },
+                    {
+                        id: '20022104',
+                        text: 'you'
+                    },
+                ],
+                obj: {
+                    name: 'xin',
+                    age: 27,
+                    gender: 'male'
+                },
+                listArr:[1, 2, 3, 4]
+            }
+        })
+    </script>
+</body>
+</html>

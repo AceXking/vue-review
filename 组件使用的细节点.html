@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <tbody>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+            </tbody>
+        </table>
+        <div>-------------分割-------------</div>
+        <table>
+            <tbody>
+                <tr is="comTr"></tr>
+            </tbody>
+        </table>
+        <div>-------------分割-------------</div>
+        <div ref="testRef" @click="handleClick">click me</div>
+        <div>-------------分割-------------</div>
+        <counter ref="one" @change="handleChange"></counter>
+        <counter ref="two" @change="handleChange"></counter>
+        <div>合计: {{total}}</div>
+    </div>
+    <script>
+        Vue.component('row', {
+            template: '<tr><td>this is a row</td></tr>'
+        })
+        Vue.component('comTr', {
+            data: function() {
+                return {
+                    content: 'this is content'
+                }
+            },
+            template: '<tr><td>{{content}}</td></tr>'
+        })
+        Vue.component('counter', {
+            template: '<div @click="handleClick">{{number}}</div>',
+            data: function() {
+                return {
+                    number: 0
+                }
+            },
+            methods: {
+                handleClick: function() {
+                    this.number ++
+                    this.$emit('change')
+                }
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                total: 0
+            },
+            methods: {
+                handleClick: function() {
+                    console.log(this.$refs.testRef.innerHTML)
+                },
+                handleChange: function() {
+                    // this.total ++
+                    this.total = this.$refs.one.number + this.$refs.two.number
+                }
+            }
+        })
+    </script>
+</body>
+</html>

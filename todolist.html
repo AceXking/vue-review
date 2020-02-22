@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="msg">
+        <button @click="handleBtnClick">提交</button>
+        <ul>
+            <li v-for="item in listData">{{ item }}</li>
+        </ul>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                msg: '',
+                listData: ['第一课的内容', '第二课的内容']
+            },
+            methods: {
+                handleBtnClick: function() {
+                    if(!this.msg) {
+                        alert('请输入内容')
+                        return
+                    }
+                    this.listData.push(this.msg)
+                    this.msg = ''
+                }
+            }
+        })
+    </script>
+</body>
+</html>
